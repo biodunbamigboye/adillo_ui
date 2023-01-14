@@ -1,7 +1,13 @@
 <template>
   <v-app id="inspire">
     <v-navigation-drawer v-model="drawer">
-      <!--  -->
+      <v-list>
+        <v-list-item
+          prepend-avatar="./assets/swarm.svg"
+          title="Sandra Adams"
+          subtitle="sandra_a88@gmailcom"
+        ></v-list-item>
+      </v-list>
     </v-navigation-drawer>
 
     <v-app-bar>
