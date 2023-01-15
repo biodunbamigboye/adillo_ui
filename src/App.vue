@@ -28,7 +28,11 @@
             :key="index"
             :value="index"
           >
-            <v-list-item-title>{{ item }}</v-list-item-title>
+            <v-list-item-title
+              ><RouterLink :to="{ name: item.route }">{{
+                item.title
+              }}</RouterLink></v-list-item-title
+            >
           </v-list-item>
         </v-list>
       </v-menu>
@@ -51,6 +55,7 @@
     <v-navigation-drawer v-model="drawer">
       <v-list>
         <v-list-item
+          active
           prepend-icon="mdi-video-outline"
           title="My Recordings"
         ></v-list-item>
@@ -61,75 +66,35 @@
       </v-list>
     </v-navigation-drawer>
 
-    <v-main>
+    <v-main style="padding-left: 100px">
       <!--  -->
-      <v-breadcrumbs :items="breadCrumbItems">
-        <template v-slot:divider>
-          <v-icon icon="mdi-chevron-right"></v-icon>
-        </template>
-      </v-breadcrumbs>
-
-      <!-- <div style="display: inline">
-        <span class="text-2xl font-bold">My Recordings 25</span>
-        <v-spacer></v-spacer>
-        <v-btn variant="contained" color="danger" prepend-icon="mdi-video"
-          >Start Recording</v-btn
-        >
-      </div> -->
-      <table class="table-auto">
-        <thead>
-          <tr>
-            <th v-for="header in headers" :key="header">{{ header }}</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="content in contents" :key="content.recording">
-            <td>{{ content.recording }}</td>
-            <td>{{ content.title }}</td>
-            <td>{{ content.view }}</td>
-            <td>{{ content.size }}</td>
-            <td>{{ content.lastModified }} ...</td>
-          </tr>
-        </tbody>
-      </table>
+      <router-view></router-view>
+      <!--  -->
     </v-main>
   </v-app>
 </template>
 
 <script>
+import { faker } from "@faker-js/faker";
+import Recorder from "./views/Recorder.vue";
 export default {
   data: () => ({
     drawer: null,
     appBarItems: ["Channels", "Analytics", "Settings"],
-    menuItems: ["Snapbyte Recorder", "Audio Bounce", "Sugar Voice"],
-    breadCrumbItems: [
+    menuItems: [
       {
-        title: "Snapbyte",
-        disabled: false,
-        href: "breadcrumbs_dashboard",
+        title: "Snapbyte Recorder",
+        route: "recorder",
       },
       {
-        title: "My Recordings",
-        disabled: false,
-        href: "breadcrumbs_link_1",
+        title: "Audio Bouncer",
+        route: "recorder",
       },
-    ],
-    headers: ["Recordings", "Title", "View", "Size", "Last Modified"],
-    contents: [
       {
-        recording: "Recording 1wwwwwwwwwwwwww",
-        title: "Title 1",
-        view: "View 1",
-        size: "Size 1",
-        lastModified: "Last Modified 1",
+        title: "Sugar Voice",
+        route: "recorder",
       },
     ],
   }),
 };
 </script>
-<style scoped>
-.tools-btn.v-btn {
-  border-top: 5px solid #0dabd8;
-  padding-top: 5px;
-}
-</style>
