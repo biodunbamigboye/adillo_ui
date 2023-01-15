@@ -11,18 +11,13 @@
         followers and customers.
       </p>
       <div class="display:flex; flex-direction:row">
-        <v-btn
-          rounded
-          color="#EF5350"
-          style="margin-top: 20px; margin-right: 20px"
-          prepend-icon="mdi-record"
-          >Start Recording
-        </v-btn>
+        <new-recording></new-recording>
         <v-btn
           rounded
           color="#0DABD8"
           style="margin-top: 20px"
           prepend-icon="mdi-video"
+          class="text-white"
           >New Request</v-btn
         >
       </div>
@@ -39,7 +34,7 @@
             rounded
             color="#0DABD8"
             style="margin-top: 20px"
-            prepend-icon="mdi-video"
+            class="text-white"
             >Download the Desktop Recorder
           </v-btn>
         </p>
@@ -48,7 +43,11 @@
   </v-container>
 </template>
 <script>
+import NewRecording from "../components/NewRecording.vue";
 export default {
+  components: {
+    NewRecording,
+  },
   data: () => {},
 };
 </script>
