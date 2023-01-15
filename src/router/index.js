@@ -11,7 +11,7 @@ const router = createRouter({
       children: [
         {
           path: "/recordings",
-          name: "Recordings",
+          name: "recordings",
           component: () => import("../views/Recording.vue"),
         },
         {

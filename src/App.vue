@@ -55,6 +55,7 @@
     <v-navigation-drawer v-model="drawer">
       <v-list>
         <v-list-item
+          :to="{ name: 'recordings' }"
           active
           prepend-icon="mdi-video-outline"
           title="My Recordings"

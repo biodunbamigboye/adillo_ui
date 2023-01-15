@@ -23,17 +23,46 @@
       <v-card-text> Save the recording in </v-card-text>
       <v-card-text>
         <v-select
-          v-model="selected"
+          v-model="form.project"
           :items="items"
           label="Select a Project"
           outlined
         ></v-select>
+        <span
+          class="text-red-500 justify-center text-center"
+          v-if="formErrors.project"
+          >{{ formErrors.project }}</span
+        >
       </v-card-text>
+
       <div class="flex flex-row">
-        <v-card-text size="20"> Record Screen </v-card-text>
+        <v-card-text color="#21455E"> Record Screen </v-card-text>
         <v-spacer></v-spacer>
-        <v-switch color="success"></v-switch>
+        <v-switch v-model="form.screen" color="success" inset></v-switch>
       </div>
+
+      <div class="flex flex-row">
+        <v-card-text color="#21455E"> Record Camera </v-card-text>
+        <v-spacer></v-spacer>
+        <v-switch color="success" v-model="form.camera" inset></v-switch>
+      </div>
+
+      <div class="flex flex-row">
+        <v-card-text color="#21455E"> Record Mic </v-card-text>
+        <v-spacer></v-spacer>
+        <v-switch color="success" v-model="form.mic" inset></v-switch>
+      </div>
+
+      <v-card-actions style="align-items: center; justify-content: center">
+        <v-btn
+          variant="flat"
+          width="80%"
+          @click="handleSubmit"
+          color="success"
+          rounded
+          >Start Recording</v-btn
+        >
+      </v-card-actions>
     </v-card>
   </v-dialog>
 </template>
@@ -44,7 +73,23 @@ export default {
       dialog: false,
       selected: null,
       items: ["Test Project 1 ", "Test Project 2", "Test Project 3"],
+      form: {
+        project: null,
+        screen: true,
+        camera: true,
+        mic: false,
+      },
+      formErrors: {},
     };
+  },
+
+  methods: {
+    handleSubmit() {
+      this.formErrors = {};
+      if (!this.form.project) {
+        this.formErrors.project = "Please Select a Project";
+      }
+    },
   },
 };
 </script>
