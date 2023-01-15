@@ -13,11 +13,7 @@
   >
     <thead>
       <tr>
-        <th>Recordings</th>
-        <th>Title</th>
-        <th>View</th>
-        <th>Size</th>
-        <th>Last Modified</th>
+        <th v-for="(heading, index) in headers" :key="index">{{ heading }}</th>
       </tr>
     </thead>
     <tbody>
@@ -49,7 +45,22 @@ export default {
   setup() {
     const globalConfig = useGlobalConfigStore();
     globalConfig.showSideNav = true;
-    return { globalConfig };
+
+    let contents = [];
+
+    for (let i = 0; i < 10; i++) {
+      contents.push({
+        recording: faker.image.avatar(),
+        title: {
+          main: faker.lorem.sentence(),
+          sub: faker.lorem.paragraph(),
+        },
+        view: 324,
+        size: "923 KB",
+        lastModified: "3 Months Ago",
+      });
+    }
+    return { globalConfig, contents };
   },
   components: {
     RecordingHeader,
@@ -67,19 +78,7 @@ export default {
         href: "breadcrumbs_link_1",
       },
     ],
-    // headers: ["Recordings", "Title", "View", "Size", "Last Modified"],
-    contents: [
-      {
-        recording: faker.image.avatar(),
-        title: {
-          main: faker.lorem.sentence(),
-          sub: faker.lorem.paragraph(),
-        },
-        view: "323",
-        size: "923 KB",
-        lastModified: "23rd Dec 2020",
-      },
-    ],
+    headers: ["Recordings", "Title", "View", "Size", "Last Modified"],
   }),
 };
 </script>

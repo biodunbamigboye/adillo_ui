@@ -32,6 +32,10 @@ export default {
     return { globalConfig, formData };
   },
   mounted() {
+    if (!this.formData) {
+      this.$router.push("/recording");
+    }
+
     if (this.formData.screen) {
       this.recordScreen();
     }
