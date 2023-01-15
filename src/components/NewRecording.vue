@@ -89,6 +89,11 @@ export default {
       if (!this.form.project) {
         this.formErrors.project = "Please Select a Project";
       }
+
+      this.$router.push({
+        name: "live-recording",
+        params: { formData: this.form },
+      });
     },
   },
 };

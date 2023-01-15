@@ -21,6 +21,12 @@ const router = createRouter({
         },
       ],
     },
+    {
+      path: "/live-recording",
+      name: "live-recording",
+      component: () => import("../views/LiveRecording.vue"),
+      props: true,
+    },
   ],
 });
 

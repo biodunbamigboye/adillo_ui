@@ -30,9 +30,7 @@
       >New Request
     </v-btn>
 
-    <v-btn variant="flat" rounded color="error" prepend-icon="mdi-record"
-      >Start Recording</v-btn
-    >
+    <new-recording></new-recording>
   </div>
 
   <table
@@ -70,7 +68,11 @@
 
 <script>
 import { faker } from "@faker-js/faker";
+import NewRecording from "../components/NewRecording.vue";
 export default {
+  components: {
+    NewRecording,
+  },
   data: () => ({
     breadCrumbItems: [
       {
