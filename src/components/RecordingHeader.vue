@@ -17,9 +17,9 @@
     <v-btn
       variant="flat"
       rounded
-      color="secondary"
+      color="#0DABD8"
       prepend-icon="mdi-video"
-      class="mr-3 text-white"
+      class="text-white mr-3"
       >New Request
     </v-btn>
 
