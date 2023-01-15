@@ -20,11 +20,25 @@
 <script>
 import AppBar from "../components/AppBar.vue";
 import { useGlobalConfigStore } from "../stores/globalConfig";
+import { useRecordingStore } from "../stores/recording";
 export default {
   setup() {
     const globalConfig = useGlobalConfigStore();
     globalConfig.showSideNav = false;
-    return { globalConfig };
+
+    const recording = useRecordingStore();
+
+    const formData = recording.recordingFormData;
+    return { globalConfig, formData };
+  },
+  mounted() {
+    if (this.formData.screen) {
+      this.recordScreen();
+    }
+
+    if (this.formData.camera) {
+      this.recordCamera();
+    }
   },
   components: {
     AppBar,
@@ -36,7 +50,20 @@ export default {
     },
   },
   data: () => ({}),
-  methods: {},
+  methods: {
+    async recordScreen() {
+      return await navigator.mediaDevices.getDisplayMedia({
+        audio: this.formData.mic,
+        video: { mediaSource: "screen" },
+      });
+    },
+    async recordCamera() {
+      return await navigator.mediaDevices.getUserMedia({
+        audio: this.formData.mic,
+        video: this.formData.camera,
+      });
+    },
+  },
 };
 </script>
 

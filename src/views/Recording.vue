@@ -6,32 +6,7 @@
     </template>
   </v-breadcrumbs>
 
-  <div class="flex flex-row ml-2">
-    <span class="text-2xl font-bold mr-10">My Recordings 25</span>
-    <v-btn variant="outlined" rounded prepend-icon="mdi-calendar" class="mr-3"
-      >By Date
-    </v-btn>
-
-    <v-btn
-      variant="outlined"
-      rounded
-      prepend-icon="mdi-filter-outline"
-      append-icon="mdi-chevron-down"
-      class="mr-3"
-      >Add Filter
-    </v-btn>
-
-    <v-btn
-      variant="flat"
-      rounded
-      color="secondary"
-      prepend-icon="mdi-video"
-      class="mr-3"
-      >New Request
-    </v-btn>
-
-    <new-recording></new-recording>
-  </div>
+  <recording-header></recording-header>
 
   <table
     class="table-auto border-separate border-spacing-2 border-slate-400 w-screen text-left"
@@ -68,10 +43,16 @@
 
 <script>
 import { faker } from "@faker-js/faker";
-import NewRecording from "../components/NewRecording.vue";
+import { useGlobalConfigStore } from "../stores/globalConfig";
+import RecordingHeader from "../components/RecordingHeader.vue";
 export default {
+  setup() {
+    const globalConfig = useGlobalConfigStore();
+    globalConfig.showSideNav = true;
+    return { globalConfig };
+  },
   components: {
-    NewRecording,
+    RecordingHeader,
   },
   data: () => ({
     breadCrumbItems: [

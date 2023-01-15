@@ -4,7 +4,6 @@
       <v-btn
         rounded
         color="#EF5350"
-        style="margin-top: 20px; margin-right: 20px"
         prepend-icon="mdi-record"
         v-bind="props"
         class="text-white"
@@ -67,7 +66,13 @@
   </v-dialog>
 </template>
 <script>
+import { useRecordingStore } from "../stores/recording";
 export default {
+  setup() {
+    const recording = useRecordingStore();
+
+    return { recording };
+  },
   data() {
     return {
       dialog: false,
@@ -87,12 +92,11 @@ export default {
     handleSubmit() {
       this.formErrors = {};
       if (!this.form.project) {
-        this.formErrors.project = "Please Select a Project";
+        return (this.formErrors.project = "Please Select a Project");
       }
-
+      this.recording.recordingFormData = this.form;
       this.$router.push({
         name: "live-recording",
-        params: { formData: this.form },
       });
     },
   },

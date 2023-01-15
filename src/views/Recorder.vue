@@ -1,5 +1,6 @@
 <template>
   <v-container fluid>
+    <RecordingHeader class="mb-5 ml-20" />
     <div class="main-section">
       <v-icon size="150" color="#a3bac6" style="margin-bottom: 20px"
         >mdi-file-document-multiple-outline</v-icon
@@ -15,7 +16,7 @@
         <v-btn
           rounded
           color="#0DABD8"
-          style="margin-top: 20px"
+          style="margin-top: 0px; margin-left: 10px"
           prepend-icon="mdi-video"
           class="text-white"
           >New Request</v-btn
@@ -44,9 +45,17 @@
 </template>
 <script>
 import NewRecording from "../components/NewRecording.vue";
+import { useGlobalConfigStore } from "../stores/globalConfig";
+import RecordingHeader from "../components/RecordingHeader.vue";
 export default {
+  setup() {
+    const globalConfig = useGlobalConfigStore();
+    globalConfig.showSideNav = true;
+    return { globalConfig };
+  },
   components: {
     NewRecording,
+    RecordingHeader,
   },
   data: () => {},
 };
